@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Aqui tem uns negocios legais pra mexer e explicar, mas é um saco comentar no XML, então dps
+     explico, vlw flws!-->
+    <item
+        android:id="@+id/action_logoff"
+        android:title="@string/logoff"
+        app:showAsAction="never" />
+
+</menu>

@@ -1,0 +1,32 @@
+<resources>
+    <!-- Activities labels. -->
+    <string name="app_name">Login</string>
+    <string name="activity_login">Login</string>
+    <string name="activity_register">Cadastrar</string>
+    <string name="activity_main">Main</string>
+
+    <!-- EditTexts and Buttons. -->
+    <string name="username">Usuário</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="confirm_password">Confirme sua senha</string>
+    <string name="login">Login</string>
+    <string name="register">Cadastrar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+
+    <!-- Messages. -->
+    <string name="registered_login">UsUsuario registrado com sucesso!\nBem-vindo,</string>
+    <string name="logout">Logout efetuado com sucesso</string>
+    <string name="welcome">Bem-vindo,</string>
+
+    <!-- Errors. -->
+    <string name="username_error">Por favor, insira um nome de usuário</string>
+    <string name="email_error">Por favor, insira um email</string>
+    <string name="password_error">Por favor, insira uma senha</string>
+    <string name="confirm_password_error">As senhas não são iguais</string>
+    <string name="logoff">Sair</string>
+    <string name="invalid_password">Senha errada</string>
+    <string name="invalid_username">Usuário não registrado ainda!</string>
+
+</resources>
