@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="standard_margin">20dp</dimen>
-    <dimen name="half_margin">10dp</dimen>
     <dimen name="my_text_size">18sp</dimen>
+    <dimen name="button_margin">10dp</dimen>
     <dimen name="ic_clear_margin">16dp</dimen>
 </resources>

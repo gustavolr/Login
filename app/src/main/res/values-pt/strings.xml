@@ -3,7 +3,8 @@
     <string name="app_name">Login</string>
     <string name="activity_login">Login</string>
     <string name="activity_register">Cadastrar</string>
-    <string name="activity_main">Main</string>
+    <string name="activity_main">Listas de compras</string>
+    <string name="activity_compras">Items da Lista</string>
 
     <!-- EditTexts and Buttons. -->
     <string name="username">Usuário</string>
@@ -14,11 +15,15 @@
     <string name="register">Cadastrar</string>
     <string name="confirm">Confirmar</string>
     <string name="cancel">Cancelar</string>
+    <string name="no_lists">Você ainda não possui nenhuma lista de compras =/</string>
+    <string name="no_items">Esta lista ainda não tem nenhum item</string>
+    <string name="list_title">Nome da lista</string>
 
     <!-- Messages. -->
     <string name="registered_login">UsUsuario registrado com sucesso!\nBem-vindo,</string>
     <string name="logout">Logout efetuado com sucesso</string>
     <string name="welcome">Bem-vindo,</string>
+    <string name="list_added">Lista adicionada com sucesso!</string>
 
     <!-- Errors. -->
     <string name="username_error">Por favor, insira um nome de usuário</string>
@@ -28,5 +33,7 @@
     <string name="logoff">Sair</string>
     <string name="invalid_password">Senha errada</string>
     <string name="invalid_username">Usuário não registrado ainda!</string>
+    <string name="invalid_list_title">Por favor, insira um nome para a sua lista</string>
+    <string name="repetitive_user">Usuário já cadastrado!</string>
 
 </resources>

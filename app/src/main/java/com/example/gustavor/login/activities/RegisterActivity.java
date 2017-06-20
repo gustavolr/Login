@@ -1,7 +1,6 @@
-package com.example.gustavor.login;
+package com.example.gustavor.login.activities;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.gustavor.login.utils.LoginUtils;
+import com.example.gustavor.login.R;
+import com.example.gustavor.login.daos.UserDao;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -33,16 +36,18 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validateFields()) {
-                    //salva o usuario do cara no SharedPreferences e tambem o salva como "logado"
-                    LoginUtils loginUtils = new LoginUtils(getApplicationContext());
-                    loginUtils.saveLogin(mUsername.getText().toString());
-                    //inserindo no db
-                    userDao.insertUser(mUsername.getText().toString(), mEmail.getText().toString(), mPassword.getText().toString());
-                    Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.registered_login) + " " + mUsername.getText().toString() + "!", Toast.LENGTH_SHORT);
-                    toast.show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    if(!userDao.insertUser(mUsername.getText().toString(), mEmail.getText().toString(), mPassword.getText().toString())){
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.repetitive_user), Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        LoginUtils loginUtils = new LoginUtils(getApplicationContext());
+                        loginUtils.saveLogin(mUsername.getText().toString(), userDao.getUser(mUsername.getText().toString()).getmId());
+                        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.registered_login) + " " + mUsername.getText().toString() + "!", Toast.LENGTH_SHORT);
+                        toast.show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
                 }
             }
         });

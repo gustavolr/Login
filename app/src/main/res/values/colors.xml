@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#00bcd4</color>
     <color name="white">#ffffff</color>
+    <color name="bg_grey">#bebebe</color>
+    <color name="abort">#f44336</color>
+    <color name="validate">#4caf50</color>
 </resources>

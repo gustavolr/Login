@@ -1,4 +1,4 @@
-package com.example.gustavor.login;
+package com.example.gustavor.login.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.gustavor.login.utils.LoginUtils;
+import com.example.gustavor.login.R;
+import com.example.gustavor.login.daos.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -58,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.welcome) + " " + mUsername.getText().toString() + "!", Toast.LENGTH_SHORT);
                     toast.show();
                     LoginUtils loginUtils = new LoginUtils(getApplicationContext());
-                    loginUtils.saveLogin(mUsername.getText().toString());
+                    loginUtils.saveLogin(mUsername.getText().toString(), userDao.getUser(mUsername.getText().toString()).getmId());
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

@@ -1,8 +1,14 @@
-package com.example.gustavor.login;
+package com.example.gustavor.login.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.gustavor.login.models.ItemCompra;
+import com.example.gustavor.login.models.Lista;
+import com.example.gustavor.login.tables.ItemCompraTable;
+import com.example.gustavor.login.tables.ListaTable;
+import com.example.gustavor.login.tables.UserTable;
 
 /**
  * Created by gustavor on 12/06/2017.
@@ -17,6 +23,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(UserTable.SQL_CREATE); //utilizando a string para criar o banco
+        db.execSQL(ListaTable.SQL_CREATE);
+        db.execSQL(ItemCompraTable.SQL_CREATE);
     }
 
     @Override

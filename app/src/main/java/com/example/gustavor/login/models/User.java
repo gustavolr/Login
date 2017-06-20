@@ -1,4 +1,4 @@
-package com.example.gustavor.login;
+package com.example.gustavor.login.models;
 
 /**
  * Created by gustavor on 12/06/2017.

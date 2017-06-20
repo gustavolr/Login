@@ -1,8 +1,11 @@
-package com.example.gustavor.login;
+package com.example.gustavor.login.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.gustavor.login.utils.LoginUtils;
+import com.example.gustavor.login.R;
 
 public class SplashActivity extends AppCompatActivity {
 
