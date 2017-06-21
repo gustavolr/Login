@@ -56,8 +56,8 @@ public class ListaDao {
 
     public void removeLista(int listaId) {
         String find = ListaTable.ID + " = '" + listaId + "';";
-        ItemCpompraDao itemCpompraDao = new ItemCpompraDao(mContext);
-        itemCpompraDao.removeItemsLista(listaId);
+        ItemCompraDao itemCompraDao = new ItemCompraDao(mContext);
+        itemCompraDao.removeItemsLista(listaId);
         mSqlite.delete(ListaTable.TABLE_NAME, find, null);
     }
 

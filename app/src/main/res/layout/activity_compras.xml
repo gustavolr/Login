@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gustavor.login.activities.ComprasActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.gustavor.login.activities.ComprasActivity">
 
     <include
         android:id="@+id/my_toolbar"
@@ -14,15 +14,6 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/no_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/no_items"
-            android:textAlignment="center"
-            android:textSize="20sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_lista"
@@ -33,7 +24,7 @@
             android:id="@+id/floating_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_create_black_24dp"
             android:tint="@color/white"

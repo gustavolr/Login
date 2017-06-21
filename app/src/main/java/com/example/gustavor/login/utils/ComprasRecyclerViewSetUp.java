@@ -12,18 +12,18 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.example.gustavor.login.R;
-import com.example.gustavor.login.adapters.ListsAdapter;
+import com.example.gustavor.login.adapters.ItemsAdapter;
 
 /**
  * Created by gustavor on 20/06/2017.
  */
 
-public class RecyclerViewSetUps {
+public class ComprasRecyclerViewSetUp {
 
     private Context mContext;
     private RecyclerView mRecyclerView;
 
-    public RecyclerViewSetUps(Context mContext, RecyclerView mRecyclerView) {
+    public ComprasRecyclerViewSetUp(Context mContext, RecyclerView mRecyclerView) {
         this.mContext = mContext;
         this.mRecyclerView = mRecyclerView;
     }
@@ -55,14 +55,14 @@ public class RecyclerViewSetUps {
             @Override
             public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 int position = viewHolder.getAdapterPosition();
-                ListsAdapter listsAdapter = (ListsAdapter) recyclerView.getAdapter();
+                ItemsAdapter itemsAdapter = (ItemsAdapter) recyclerView.getAdapter();
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int swipedPosition = viewHolder.getAdapterPosition();
-                ListsAdapter adapter = (ListsAdapter) mRecyclerView.getAdapter();
+                ItemsAdapter adapter = (ItemsAdapter) mRecyclerView.getAdapter();
                 adapter.removeList(swipedPosition);
             }
 
@@ -102,11 +102,83 @@ public class RecyclerViewSetUps {
 
         };
 
-        ItemTouchHelper mItemTouchHelperRg = new ItemTouchHelper(simpleItemTouchCallbackRight);
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallbackLeft = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
+            // we want to cache these and not allocate anything repeatedly in the onChildDraw method
+            Drawable background;
+            Drawable xMark;
+            int xMarkMargin;
+            boolean initiated;
+
+            private void init() {
+                background = new ColorDrawable(ContextCompat.getColor(mContext, R.color.validate));
+                xMark = ContextCompat.getDrawable(mContext, R.drawable.ic_done_black_24dp);
+                xMark.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                xMarkMargin = (int) mContext.getResources().getDimension(R.dimen.ic_clear_margin);
+                initiated = true;
+            }
+
+            // not important, we don't want drag & drop
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                int position = viewHolder.getAdapterPosition();
+                ItemsAdapter itemsAdapter = (ItemsAdapter) recyclerView.getAdapter();
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int swipedPosition = viewHolder.getAdapterPosition();
+                ItemsAdapter adapter = (ItemsAdapter) mRecyclerView.getAdapter();
+                adapter.setComprado(swipedPosition);
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                View itemView = viewHolder.itemView;
+
+                // not sure why, but this method get's called for viewholder that are already swiped away
+                if (viewHolder.getAdapterPosition() == -1) {
+                    // not interested in those
+                    return;
+                }
+
+                if (!initiated) {
+                    init();
+                }
+
+                // draw green background
+                background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
+                background.draw(c);
+
+                // draw x mark
+                int itemHeight = itemView.getBottom() - itemView.getTop();
+                int intrinsicWidth = xMark.getIntrinsicWidth();
+                int intrinsicHeight = xMark.getIntrinsicWidth();
+
+                int xMarkLeft = itemView.getRight() - xMarkMargin - intrinsicWidth;
+                int xMarkRight = itemView.getRight() - xMarkMargin;
+                int xMarkTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
+                int xMarkBottom = xMarkTop + intrinsicHeight;
+                xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
+
+                xMark.draw(c);
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+
+        };
+
+        ItemTouchHelper mItemTouchHelperRg = new ItemTouchHelper(simpleItemTouchCallbackRight);
+        ItemTouchHelper mItemTouchHelperLf = new ItemTouchHelper(simpleItemTouchCallbackLeft);
 
         mItemTouchHelperRg.attachToRecyclerView(mRecyclerView);
-
+        mItemTouchHelperLf.attachToRecyclerView(mRecyclerView);
 
     }
 

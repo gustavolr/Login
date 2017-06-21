@@ -18,12 +18,12 @@ import java.util.List;
  * Created by gustavor on 19/06/2017.
  */
 
-public class ItemCpompraDao {
+public class ItemCompraDao {
 
     private Context mContext;
     private SQLiteDatabase mSqlite;
 
-    public ItemCpompraDao(Context ctx) {
+    public ItemCompraDao(Context ctx) {
         mContext = ctx;
         DBOpenHelper gamingPortalOpenHelper = new DBOpenHelper(mContext);
         mSqlite = gamingPortalOpenHelper.getWritableDatabase();
@@ -42,6 +42,7 @@ public class ItemCpompraDao {
                     itemCompra.setmListId(cursor.getInt(cursor.getColumnIndex(ItemCompraTable.LIST_ID)));
                     itemCompra.setmItemName(cursor.getString(cursor.getColumnIndex(ItemCompraTable.ITEM_NAME)));
                     itemCompra.setmQtd(cursor.getInt(cursor.getColumnIndex(ItemCompraTable.ITEM_QTD)));
+                    itemCompra.setComprado(cursor.getInt(cursor.getColumnIndex(ItemCompraTable.ITEM_COMPRADO)));
                     itemCompras.add(itemCompra);
                 }while (cursor.moveToNext());
             }

@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private ListsAdapter mAdapter;
     private ListaDao listaDao;
     private LoginUtils loginUtils;
-    private TextView mEmpyt;
     private List<Lista> listas;
 
     @Override
@@ -50,26 +49,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        mEmpyt = (TextView) findViewById(R.id.no_list);
         loginUtils = new LoginUtils(getApplicationContext());
         listaDao = new ListaDao(getApplicationContext());
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_lista);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_add);
         listas = listaDao.getListas(loginUtils.getUserId());
-        mAdapter = new ListsAdapter(listas, getApplicationContext());
-        if (listas.isEmpty()) {
-            mRecyclerView.setVisibility(View.GONE);
-        } else {
-            mEmpyt.setVisibility(View.GONE);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.setAdapter(mAdapter);
-            RecyclerViewSetUps recyclerViewSetUps = new RecyclerViewSetUps(getApplicationContext(), mRecyclerView, false, true);
-            recyclerViewSetUps.setUpItemTouchHelper();
-            recyclerViewSetUps.setUpAnimationDecoratorHelper();
+        if (listas.size() == 0) {
+            Lista lista = new Lista();
+            lista.setmId(-1);
+            lista.setmUserId(-1);
+            lista.setmListName(getString(R.string.no_lists));
+            listas.add(lista);
         }
+        mAdapter = new ListsAdapter(listas, getApplicationContext());
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        RecyclerViewSetUps recyclerViewSetUps = new RecyclerViewSetUps(getApplicationContext(), mRecyclerView);
+        recyclerViewSetUps.setUpItemTouchHelper();
+        recyclerViewSetUps.setUpAnimationDecoratorHelper();
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
@@ -87,18 +91,14 @@ public class MainActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String listName = input.getText().toString();
-                                if(listName.isEmpty()) {
-                                    Toast.makeText(getApplicationContext(),getString(R.string.invalid_list_title), Toast.LENGTH_SHORT).show();
+                                if (listName.isEmpty()) {
+                                    Toast.makeText(getApplicationContext(), getString(R.string.invalid_list_title), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    if(mRecyclerView.getVisibility() == View.GONE){
-                                        mRecyclerView.setVisibility(View.VISIBLE);
-                                        mEmpyt.setVisibility(View.GONE);
-                                    }
                                     listaDao.insertLista(listName, loginUtils.getUserId());
                                     List<Lista> listas = listaDao.getListas(loginUtils.getUserId());
                                     Lista lista = listas.get(listas.size() - 1);
                                     mAdapter.addList(lista);
-                                    Toast.makeText(getApplicationContext(),getString(R.string.list_added), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), getString(R.string.list_added), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -112,20 +112,6 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2) {
-            String message = data.getStringExtra("MESSAGE");
-            if (!message.equals(" ")) {
-                listaDao.insertLista(message, loginUtils.getUserId());
-                List<Lista> aux = listaDao.getListas(loginUtils.getUserId());
-                Lista lista = aux.get(aux.size() - 1);
-                mAdapter.addList(lista);
-            }
-        }
     }
 
     //já que eu tenho a minha propria toolbar, eu tenho que popular ela com meu item de menu

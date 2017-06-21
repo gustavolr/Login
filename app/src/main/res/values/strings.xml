@@ -18,12 +18,15 @@
     <string name="no_lists">You dont have a Shopping list yet =/</string>
     <string name="no_items">This list doesn\'t have any items yet</string>
     <string name="list_title">List name</string>
+    <string name="item_title">Item name</string>
+    <string name="item_hint">Use a comma for the amount</string>
 
     <!-- Messages. -->
     <string name="registered_login">User registered successfully!\nWelcome,</string>
     <string name="logout">Logout successful</string>
     <string name="welcome">Welcome,</string>
     <string name="list_added">List added successfully!</string>
+    <string name="item_added">Item added successfully!</string>
 
     <!-- Errors. -->
     <string name="username_error">Please, enter an username</string>
@@ -34,6 +37,7 @@
     <string name="invalid_password">Wrong password</string>
     <string name="invalid_username">User not registered yet!</string>
     <string name="invalid_list_title">Please, insert a title for your list</string>
+    <string name="invalid_item_title">Please, insert a the name of the item</string>
     <string name="repetitive_user">User already registered!</string>
 
 </resources>

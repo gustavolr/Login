@@ -18,12 +18,15 @@
     <string name="no_lists">Você ainda não possui nenhuma lista de compras =/</string>
     <string name="no_items">Esta lista ainda não tem nenhum item</string>
     <string name="list_title">Nome da lista</string>
+    <string name="item_title">Nome do Produto</string>
+    <string name="item_hint">Use uma virgula para a quantidade</string>
 
     <!-- Messages. -->
     <string name="registered_login">UsUsuario registrado com sucesso!\nBem-vindo,</string>
     <string name="logout">Logout efetuado com sucesso</string>
     <string name="welcome">Bem-vindo,</string>
     <string name="list_added">Lista adicionada com sucesso!</string>
+    <string name="item_added">Item adicionado com sucesso!</string>
 
     <!-- Errors. -->
     <string name="username_error">Por favor, insira um nome de usuário</string>
@@ -34,6 +37,7 @@
     <string name="invalid_password">Senha errada</string>
     <string name="invalid_username">Usuário não registrado ainda!</string>
     <string name="invalid_list_title">Por favor, insira um nome para a sua lista</string>
+    <string name="invalid_item_title">Por favor, insira o nome do item</string>
     <string name="repetitive_user">Usuário já cadastrado!</string>
 
 </resources>

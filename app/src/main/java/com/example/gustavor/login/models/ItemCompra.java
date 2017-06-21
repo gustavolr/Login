@@ -10,7 +10,7 @@ public class ItemCompra {
     public int mListId;
     public String mItemName;
     public int mQtd;
-    public boolean comprado;
+    public int comprado;
 
     public int getmId() {
         return mId;
@@ -44,11 +44,11 @@ public class ItemCompra {
         this.mQtd = mQtd;
     }
 
-    public boolean isComprado() {
+    public int getComprado() {
         return comprado;
     }
 
-    public void setComprado(boolean comprado) {
+    public void setComprado(int comprado) {
         this.comprado = comprado;
     }
 }

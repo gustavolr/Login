@@ -1,6 +1,8 @@
 package com.example.gustavor.login.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.gustavor.login.R;
+import com.example.gustavor.login.activities.ComprasActivity;
 import com.example.gustavor.login.daos.ListaDao;
 import com.example.gustavor.login.models.Lista;
 
@@ -57,7 +60,13 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.MyViewHolder
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(mContext, ComprasActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("ID", lista.getmId());
+                bundle.putString("NAME", lista.getmListName());
+                intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -67,17 +76,17 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.MyViewHolder
         return listas.size();
     }
 
-    public void addList(Lista lista){
-        if(listas == null){
-            listas = new ArrayList<>();
-            listas.add(lista);
+    public void addList(Lista lista) {
+        if (listas.get(0).getmId() == -1) {
+            listas.set(0, lista);
+            notifyItemChanged(0);
         } else {
             listas.add(lista);
+            notifyItemInserted(listas.size() - 1);
         }
-        notifyItemInserted(listas.size() - 1);
     }
 
-    public void removeList(int position){
+    public void removeList(int position) {
         ListaDao listaDao = new ListaDao(mContext);
         listaDao.removeLista(listas.get(position).getmId());
         listas = listaDao.getListas(listas.get(0).getmUserId());
